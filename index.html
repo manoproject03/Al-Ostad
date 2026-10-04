@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" data-theme="light" data-font="medium">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#0F6B63" />
+  <meta name="description" content="تطبيق الأستاذ — الكراس اليومي الرقمي، تسيير الأقسام والتلاميذ، كشف النقاط الفصلي، التوقيت الأسبوعي، التكوين والبطاقة المهنية بدون إنترنت." />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+  <meta name="apple-mobile-web-app-title" content="الأستاذ" />
+  <title>الأستاذ — الكراس اليومي وتسيير الأقسام</title>
+
+  <link rel="manifest" href="./manifest.webmanifest" />
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 192 192'%3E%3Crect width='192' height='192' rx='42' fill='%230F6B63'/%3E%3Cpath d='M48 52h96v88H48z' fill='%23F6F7F3' rx='8'/%3E%3Cpath d='M64 74h64M64 96h64M64 118h40' stroke='%230F6B63' stroke-width='10' stroke-linecap='round'/%3E%3Ccircle cx='136' cy='128' r='22' fill='%23B7791F'/%3E%3Cpath d='M127 128l6 6 13-13' stroke='%23FFF' stroke-width='6' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <!-- الشريط العلوي -->
+    <header class="top-bar">
+      <div class="brand-cluster">
+        <div class="brand-logo" aria-hidden="true">أ</div>
+        <div>
+          <div style="display:flex; align-items:center; gap:0.5rem;">
+            <span class="brand-title">الأستاذ</span>
+            <span id="top-year-pill" class="year-pill">2025/2026</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="top-actions">
+        <div id="save-status-badge" class="save-badge" title="حالة الحفظ التلقائي المحلي">
+          ✓ تم الحفظ تلقائيًا
+        </div>
+        <button class="icon-btn" onclick="AppUI.openGlobalSearchModal()" title="بحث شامل في التطبيق">
+          🔍 <span class="hide-mobile">بحث</span>
+        </button>
+        <button class="icon-btn" onclick="AppUI.toggleTheme()" title="تبديل الوضع النهاري / الليلي">
+          🌓
+        </button>
+        <button class="icon-btn" onclick="AppUI.navigate('settings')" title="الإعدادات والنسخ الاحتياطي">
+          ⚙️
+        </button>
+      </div>
+    </header>
+
+    <!-- شريط تنبيه السنة المؤرشفة -->
+    <div id="archived-banner-slot"></div>
+
+    <!-- جسم التطبيق: القائمة الجانبية + المحتوى الرئيسي -->
+    <div class="app-body">
+      <aside class="side-nav" aria-label="القائمة الرئيسية">
+        <button class="nav-item active" data-route="home" onclick="AppUI.navigate('home')">
+          <span class="nav-icon">🏠</span>
+          <span>الرئيسية</span>
+        </button>
+        <button class="nav-item" data-route="planner" onclick="AppUI.navigate('planner')">
+          <span class="nav-icon">📖</span>
+          <span>كراسي اليومي</span>
+        </button>
+        <button class="nav-item" data-route="classes" onclick="AppUI.navigate('classes')">
+          <span class="nav-icon">👥</span>
+          <span>أقسامي وتلاميذي</span>
+        </button>
+        <button class="nav-item" data-route="gradebook" onclick="AppUI.navigate('gradebook')">
+          <span class="nav-icon">📊</span>
+          <span>كشف النقاط</span>
+        </button>
+        <button class="nav-item" data-route="schedule" onclick="AppUI.navigate('schedule')">
+          <span class="nav-icon">🗓️</span>
+          <span>جدول التوقيت والرزنامة</span>
+        </button>
+        <button class="nav-item" data-route="training" onclick="AppUI.navigate('training')">
+          <span class="nav-icon">🎓</span>
+          <span>التكوين والندوات</span>
+        </button>
+        <button class="nav-item" data-route="profile" onclick="AppUI.navigate('profile')">
+          <span class="nav-icon">🪪</span>
+          <span>بطاقتي المهنية</span>
+        </button>
+        <button class="nav-item" data-route="settings" onclick="AppUI.navigate('settings')">
+          <span class="nav-icon">⚙️</span>
+          <span>الإعدادات والنسخ الاحتياطي</span>
+        </button>
+      </aside>
+
+      <main id="main-view" class="main-content" role="main"></main>
+    </div>
+
+    <!-- شريط التنقل السفلي للهواتف -->
+    <nav class="bottom-nav" aria-label="التنقل السفلي">
+      <button class="bottom-nav-btn active" data-route="home" onclick="AppUI.navigate('home')">
+        <span class="nav-icon">🏠</span>
+        <span>الرئيسية</span>
+      </button>
+      <button class="bottom-nav-btn" data-route="planner" onclick="AppUI.navigate('planner')">
+        <span class="nav-icon">📖</span>
+        <span>كراسي اليومي</span>
+      </button>
+      <button class="bottom-nav-btn" data-route="classes" onclick="AppUI.navigate('classes')">
+        <span class="nav-icon">👥</span>
+        <span>أقسامي</span>
+      </button>
+      <button class="bottom-nav-btn" data-route="schedule" onclick="AppUI.navigate('schedule')">
+        <span class="nav-icon">🗓️</span>
+        <span>التوقيت</span>
+      </button>
+      <button class="bottom-nav-btn" onclick="openMoreSheet()">
+        <span class="nav-icon">☰</span>
+        <span>المزيد</span>
+      </button>
+    </nav>
+  </div>
+
+  <!-- جذر النوافذ المنبثقة -->
+  <div id="modal-root"></div>
+
+  <!-- منطقة الطباعة الرسمية A4 -->
+  <div id="print-area"></div>
+
+  <script src="./app-data.js"></script>
+  <script src="./app-ui.js"></script>
+  <script>
+    function openMoreSheet() {
+      AppUI.showModal(
+        'أقسام إضافية في تطبيق الأستاذ',
+        `
+          <div style="display:flex; flex-direction:column; gap:0.6rem;">
+            <button class="btn btn-outline btn-block" style="justify-content:flex-start;" onclick="AppUI.closeModal(); AppUI.navigate('gradebook');">📊 كشف النقاط الفصلي</button>
+            <button class="btn btn-outline btn-block" style="justify-content:flex-start;" onclick="AppUI.closeModal(); AppUI.navigate('training');">🎓 التكوين والندوات والرزنامة التربوية</button>
+            <button class="btn btn-outline btn-block" style="justify-content:flex-start;" onclick="AppUI.closeModal(); AppUI.navigate('profile');">🪪 بطاقتي المهنية</button>
+            <button class="btn btn-outline btn-block" style="justify-content:flex-start;" onclick="AppUI.closeModal(); AppUI.navigate('settings');">⚙️ الإعدادات والنسخ الاحتياطي JSON</button>
+          </div>
+        `
+      );
+    }
+
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('./sw.js').catch(() => {});
+      });
+    }
+  </script>
+</body>
+</html>

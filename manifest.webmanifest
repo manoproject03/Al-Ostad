@@ -1,0 +1,21 @@
+{
+  "name": "الأستاذ — الكراس اليومي وتسيير الأقسام",
+  "short_name": "الأستاذ",
+  "description": "تطبيق الأستاذ لتنظيم الكراس اليومي، الأقسام والتلاميذ، كشف النقاط، التوقيت الأسبوعي، والملف المهني بدون إنترنت.",
+  "lang": "ar",
+  "dir": "rtl",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#F6F7F3",
+  "theme_color": "#0F6B63",
+  "icons": [
+    {
+      "src": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 192 192'%3E%3Crect width='192' height='192' rx='42' fill='%230F6B63'/%3E%3Cpath d='M48 52h96v88H48z' fill='%23F6F7F3' rx='8'/%3E%3Cpath d='M64 74h64M64 96h64M64 118h40' stroke='%230F6B63' stroke-width='10' stroke-linecap='round'/%3E%3Ccircle cx='136' cy='128' r='22' fill='%23B7791F'/%3E%3Cpath d='M127 128l6 6 13-13' stroke='%23FFF' stroke-width='6' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E",
+      "sizes": "192x192",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
