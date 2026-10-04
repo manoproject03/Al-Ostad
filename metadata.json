@@ -1,0 +1,6 @@
+{
+  "name": "تطبيق الأستاذ",
+  "description": "التطبيق الرقمي المتكامل لأستاذ اللغة العربية في التعليم المتوسط بالجزائر (يعمل 100% دون إنترنت)",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
